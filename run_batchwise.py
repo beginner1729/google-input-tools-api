@@ -22,7 +22,12 @@ def handle_outputs(outputs):
         if val[0] != 'SUCCESS':
             reformed_outputs.append('')
             continue
-        reformed_outputs.append(val[1][0][1][0].strip())
+	    
+        try:
+            reformed_outputs.append(val[1][0][1][0].strip())
+        except IndexError:
+	        reformed_outputs.append('')
+        
     return reformed_outputs
 
 if __name__ == '__main__':
@@ -30,7 +35,7 @@ if __name__ == '__main__':
     with open(args.input, 'r') as rf:
         with open(args.output,'w') as wf:
             batch = []
-            for line in rf.readlines(1000):
+            for line in rf.readlines():
                 batch.append(line)
                 if len(batch)==args.batch_size:
                     transversion = get_transliterated(batch, args.itc)
