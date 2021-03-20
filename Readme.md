@@ -9,12 +9,12 @@ The implementation here accomplish just that in python(>=3.6). This repo here ju
 
 ### Command to Run
 
->python run_batchwise.py --input eng_to_bengali.txt --output in_bengali.txt --batch_size 100 --itc bn-t-i0-und
+>python run_batchwise.py --input eng_to_bengali.txt --output in_bengali.csv --batch_size 100 --itc bn
 
 __Input Args__
 
 - *intput* : path to newline seperated input sentences in romanized version
-- *output* : path to output file
+- *output* : path to output file. which is a csv file with 2 colums romanWord,nativeWord
 - *batch_size* : number of sentences to consider at a time
 - *itc* : this is the code which specifies what language are we referring here. More codes can be found [here](https://cloud.google.com/translate/docs/languages)
 

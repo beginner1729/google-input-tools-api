@@ -3,7 +3,7 @@ import asyncio
 
 async def requests(inputs, itc):
     base_url = r"http://inputtools.google.com" + \
-        r'/request?text=' + inputs + '&itc=' + itc + '&num=1&cp=0&cs=1&ie=utf-8&oe=utf-8&app=test'
+        r'/request?text=' + inputs + '&itc=' + itc + '-t-i0-und&num=1&cp=0&cs=1&ie=utf-8&oe=utf-8&app=test'
     async with aiohttp.ClientSession() as session:
         async with session.get(base_url) as response:
 
