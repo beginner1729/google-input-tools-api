@@ -17,9 +17,10 @@ parse.add_argument("--batch_size", default=100, type=int,
 
 def handle_outputs(batch, outputs):
     reformed_outputs = []
-    assert(len(batch)==len(outputs))
-    for trans, val in zip(batch, outputs):
+    total_trans = []
+    for val in outputs:
         val = eval(val)
+        trans = val[1][0][0]
         if val[0] != 'SUCCESS':
             reformed_outputs.append(','.join([trans,' ']))
             continue
@@ -29,7 +30,11 @@ def handle_outputs(batch, outputs):
             reformed_outputs.append(','.join([trans,v_edited]))
         except IndexError:
 	        reformed_outputs.append(','.join([trans,' ']))
-        
+        total_trans.append(trans)
+    missed = set(batch).difference(set(total_trans))
+    if len(missed) > 0:
+        print("missed translation are")
+        print(missed)
     return reformed_outputs
 
 if __name__ == '__main__':
@@ -39,7 +44,8 @@ if __name__ == '__main__':
             wf.write('romanWord,nativeWord\n')
             batch = []
             for line in rf.read().split('\n'):
-                batch.append(line)
+                if len(line)>0:
+                    batch.append(line)
                 if len(batch)==args.batch_size:
                     transversion = get_transliterated(batch, args.itc)
                     reformed_outputs = handle_outputs(batch, transversion)
