@@ -51,6 +51,7 @@ if __name__ == '__main__':
                     reformed_outputs = handle_outputs(batch, transversion)
                     full_text = '\n'.join(reformed_outputs)
                     wf.write(full_text)
+                    wf.write("\n")
                     batch = []
             transversion = get_transliterated(batch, args.itc)
             reformed_outputs = handle_outputs(batch, transversion)
